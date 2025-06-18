@@ -1,0 +1,37 @@
+import './modulepreload-polyfill-B5Qt9EMX.js';
+/* empty css               */ const e = { email: '', message: '' },
+  r = 'feedback-form-state',
+  o = document.querySelector('.feedback-form');
+function l() {
+  localStorage.setItem(r, JSON.stringify(e));
+}
+function n() {
+  try {
+    const a = localStorage.getItem(r);
+    if (a) {
+      const t = JSON.parse(a);
+      (e.email = t.email || ''), (e.message = t.message || '');
+      const s = o.elements.email,
+        m = o.elements.message;
+      (s.value = e.email), (m.value = e.message);
+    }
+  } catch (a) {
+    console.log('Error loading from storage:', a);
+  }
+}
+function i() {
+  (e.email = ''), (e.message = ''), o.reset(), localStorage.removeItem(r);
+}
+o.addEventListener('input', a => {
+  const { name: t, value: s } = a.target;
+  (t === 'email' || t === 'message') && ((e[t] = s.trim()), l());
+});
+o.addEventListener('submit', a => {
+  if ((a.preventDefault(), !e.email || !e.message)) {
+    alert('Fill please all fields');
+    return;
+  }
+  console.log(e), i();
+});
+document.addEventListener('DOMContentLoaded', n);
+//# sourceMappingURL=form-CYeu3HID.js.map
